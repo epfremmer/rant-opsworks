@@ -8,5 +8,5 @@
 #
 
 package 'apache2' do
-    action: remove
+    action :remove
 end
