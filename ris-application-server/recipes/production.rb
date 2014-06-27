@@ -31,6 +31,7 @@ end
 
 link '/etc/nginx/sites-enabled/login.rantmn.com' do
     to '/etc/nginx/sites-available/login.rantmn.com'
+    notifies :restart, 'service[nginx]'
 end
 
 cookbook_file '/etc/php5/fpm/pool.d/login.rantmn.com.conf' do
@@ -38,12 +39,5 @@ cookbook_file '/etc/php5/fpm/pool.d/login.rantmn.com.conf' do
     group 'root'
     source 'login.rantmn.com.conf'
     mode '0644'
-end
-
-service 'nginx' do
-    action [ :restart ]
-end
-
-service 'php5-fpm' do
-    action [ :restart ]
+    notifies :restart, 'service[php5-fpm]'
 end

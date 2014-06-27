@@ -83,6 +83,6 @@ directory '/var/run/php5-fpm' do
 end
 
 service 'php5-fpm' do
-    supports :restart => true
+    supports :status => true, :start => true, :stop => true, :restart => true
     action :enable
 end
