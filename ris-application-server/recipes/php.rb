@@ -63,9 +63,9 @@ package 'php5-xsl' do
     action :install
 end
 
-package 'php5-pear' do
-    action :install
-end
+# package 'php5-pear' do
+#     action :install
+# end
 
 package 'libssh2-php' do
     action :install
