@@ -75,10 +75,6 @@ package 'php5-cli' do
     action :install
 end
 
-service 'php5-fpm' do
-    action [ :enable, :start ]
-end
-
 directory '/var/run/php5-fpm' do
     owner 'root'
     group 'root'
