@@ -76,8 +76,8 @@ package 'php5-cli' do
 end
 
 directory '/var/run/php5-fpm' do
-    owner 'root'
-    group 'root'
+    owner 'www-data'
+    group 'www-data'
     recursive true
     mode '0644'
 end
