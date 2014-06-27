@@ -63,9 +63,9 @@ package 'php5-xsl' do
     action :install
 end
 
-# package 'php5-pear' do
-#     action :install
-# end
+package 'php-pear' do
+   action :install
+end
 
 package 'libssh2-php' do
     action :install
@@ -83,5 +83,6 @@ directory '/var/run/php5-fpm' do
 end
 
 service 'php5-fpm' do
-    action [ :restart ]
+    supports :restart => true
+    action [ :enable, :start ]
 end
