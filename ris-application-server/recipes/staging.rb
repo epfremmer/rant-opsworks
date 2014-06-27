@@ -39,5 +39,5 @@ cookbook_file '/etc/php5/fpm/pool.d/login.rantmn.org.conf' do
     group 'root'
     source 'login.rantmn.org.conf'
     mode '0644'
-    notifies :restart, 'service[php5-fpm]'
+    notifies :restart, 'service[php-fpm]'
 end

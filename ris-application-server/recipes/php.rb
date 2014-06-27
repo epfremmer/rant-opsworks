@@ -82,7 +82,9 @@ directory '/var/run/php5-fpm' do
     mode '0644'
 end
 
-service 'php5-fpm' do
+service 'php-fpm' do
+    service_name 'php5-fpm'
+    restart_command 'service php5-fpm restart'
     supports :status => true, :start => true, :stop => true, :restart => true
-    action :enable
+    action [:enable, :start]
 end
