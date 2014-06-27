@@ -25,7 +25,7 @@ end
 cookbook_file '/etc/nginx/sites-available/login.rantmn.com' do
     owner 'root'
     group 'root'
-    source 'login.rantmn.com'
+    source 'nginx.production-vhost'
     mode '0644'
 end
 

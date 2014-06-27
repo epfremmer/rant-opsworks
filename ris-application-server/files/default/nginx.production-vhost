@@ -1,0 +1,29 @@
+server {
+    server_name  login.rantmn.com;
+    rewrite ^(.*) http://login.rantmn.com$1 permanent;
+}
+
+server {
+        listen 80;
+        server_name login.rantmn.com;
+                root   /var/www/login.rantmn.com/htdocs;
+                index index.php;
+        include /etc/nginx/security;
+
+# Logging --
+access_log  /var/log/nginx/login.rantmn.com.access.log;
+error_log  /var/log/nginx/login.rantmn.com.error.log notice;
+
+        # serve static files directly
+        location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
+            access_log        off;
+            expires           max;
+        }
+
+        location ~ \.php$ {
+        try_files $uri =404;
+                fastcgi_pass unix:/var/run/php5-fpm/login.rantmn.com.socket;
+                fastcgi_index index.php;
+                include /etc/nginx/fastcgi_params;
+        }
+}
