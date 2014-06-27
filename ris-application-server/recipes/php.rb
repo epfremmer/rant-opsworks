@@ -71,11 +71,11 @@ package 'libssh2-php' do
     action :install
 end
 
-package 'php-cli' do
+package 'php5-cli' do
     action :install
 end
 
-service 'php-fpm' do
+service 'php5-fpm' do
     action [ :enable, :start ]
 end
 
@@ -86,6 +86,6 @@ directory '/var/run/php5-fpm' do
     mode '0644'
 end
 
-service 'php-fpm' do
+service 'php5-fpm' do
     action [ :restart ]
 end
