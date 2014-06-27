@@ -84,5 +84,5 @@ end
 
 service 'php5-fpm' do
     supports :restart => true
-    action [ :enable, :start ]
+    action :enable
 end
