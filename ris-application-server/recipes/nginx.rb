@@ -11,10 +11,6 @@ package 'nginx-full' do
     action :install
 end
 
-service 'nginx' do
-    action [ :enable, :start ]
-end
-
 cookbook_file '/etc/nginx/nginx.conf' do
     owner 'root'
     group 'root'
@@ -51,11 +47,11 @@ end
 directory '/var/www' do
     owner 'www-data'
     owner 'www-data'
-    mode '0644'
+    mode '0755'
     action :create
 end
 
 service 'nginx' do
     supports :status => true, :start => true, :stop => true, :restart => true
-    action [ :restart ]
+    action [ :enable, :restart ]
 end

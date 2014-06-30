@@ -1,12 +1,7 @@
 server {
-    server_name  login.rantmn.org;
-    rewrite ^(.*) http://login.rantmn.org$1 permanent;
-}
-
-server {
         listen 80;
         server_name login.rantmn.org;
-                root   /var/www/login.rantmn.org/htdocs;
+                root   /var/www/login.rantmn.org/web;
                 index index.php;
         include /etc/nginx/security;
 

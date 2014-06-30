@@ -16,8 +16,8 @@ directory '/var/www/login.rantmn.com/web' do
 end
 
 cookbook_file '/var/www/login.rantmn.com/web/info.php' do
-    owner 'root'
-    group 'root'
+    owner 'www-data'
+    group 'www-data'
     source 'info.php'
     mode '0644'
 end
