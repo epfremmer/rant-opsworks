@@ -79,5 +79,5 @@ directory '/var/run/php5-fpm' do
     owner 'www-data'
     group 'www-data'
     recursive true
-    mode '0644'
+    mode '0744'
 end
