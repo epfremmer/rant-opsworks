@@ -49,6 +49,6 @@ cookbook_file '/etc/php5/fpm/pool.d/login.rantmn.com.conf' do
 end
 
 execute 'restartPhpFpm' do
-    command 'service php5-fpm restart'
+    command 'sudo service php5-fpm restart'
     action :nothing
 end
