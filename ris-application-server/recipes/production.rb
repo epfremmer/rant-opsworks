@@ -11,7 +11,7 @@
 directory '/var/www/login.rantmn.com/web' do
     owner 'www-data'
     group 'www-data'
-    mode '0644'
+    mode '0755'
     recursive true
 end
 
@@ -19,7 +19,14 @@ cookbook_file '/var/www/login.rantmn.com/web/info.php' do
     owner 'www-data'
     group 'www-data'
     source 'info.php'
-    mode '0644'
+    mode '0755'
+end
+
+cookbook_file '/var/www/login.rantmn.com/web/knock-knock.html' do
+    owner 'www-data'
+    group 'www-data'
+    source 'balancer.html'
+    mode '0755'
 end
 
 cookbook_file '/etc/nginx/sites-available/login.rantmn.com' do
