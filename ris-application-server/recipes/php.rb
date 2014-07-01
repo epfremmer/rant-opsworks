@@ -81,3 +81,8 @@ directory '/var/run/php5-fpm' do
     recursive true
     mode '0744'
 end
+
+service 'php5-fpm' do
+    supports :status => true, :start => true, :stop => true, :restart => true
+    action [ :enable, :restart ]
+end

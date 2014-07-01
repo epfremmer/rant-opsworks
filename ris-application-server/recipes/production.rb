@@ -46,9 +46,5 @@ cookbook_file '/etc/php5/fpm/pool.d/login.rantmn.com.conf' do
     group 'root'
     source 'login.rantmn.com.conf'
     mode '0644'
-end
-
-execute 'restartPhpFpm' do
-    command 'sudo service php5-fpm restart'
-    action :nothing
+    notifies :restart, resources(:service => "php5-fpm"), :immediately
 end
