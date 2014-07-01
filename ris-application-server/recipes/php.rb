@@ -82,8 +82,9 @@ directory '/var/run/php5-fpm' do
     mode '0744'
 end
 
-service 'php5-fpm' do
-    provider Chef::Provider::Service::Upstart
-    supports :status => true, :start => true, :stop => true, :restart => true
-    action [ :enable, :restart ]
+# Since we do not have any pool files we do not attempt to start the service
+service "php-fpm" do
+  service_name('php5-fpm') if platform_family?('debian')
+  action :enable
+  provider(Chef::Provider::Service::Upstart)if (platform?('ubuntu') && node['platform_version'].to_f >= 14.04)
 end
