@@ -6,6 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+# encoding: UTF-8
 
 package 'php5' do
     action :install
