@@ -8,6 +8,8 @@
 #
 # encoding: UTF-8
 
+Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
+
 package 'php5' do
     action :install
 end
