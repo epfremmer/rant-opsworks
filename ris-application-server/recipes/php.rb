@@ -7,9 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-Encoding.default_external = Encoding::UTF_8
-Encoding.default_internal = Encoding::UTF_8
-
 package 'php5' do
     action :install
 end
