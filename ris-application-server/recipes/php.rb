@@ -83,6 +83,7 @@ directory '/var/run/php5-fpm' do
 end
 
 service 'php5-fpm' do
+    provider Chef::Provider::Service::Upstart
     supports :status => true, :start => true, :stop => true, :restart => true
     action [ :enable, :restart ]
 end
