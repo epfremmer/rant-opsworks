@@ -82,9 +82,8 @@ directory '/var/run/php5-fpm' do
     mode '0744'
 end
 
-service 'php-fpm' do
-  service_name 'php5-fpm'
-  supports :restart => true
-  action :enable
-  provider Chef::Provider::Service::Upstart
+service 'php5-fpm' do
+    provider Chef::Provider::Service::Upstart
+    supports :restart => true
+    action [ :enable, :start ]
 end
