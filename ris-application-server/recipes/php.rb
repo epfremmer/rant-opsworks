@@ -85,5 +85,5 @@ end
 service 'php5-fpm' do
     provider Chef::Provider::Service::Upstart
     supports :restart => true
-    action [ :enable, :start ]
+    action :nothing
 end
