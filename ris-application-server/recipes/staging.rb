@@ -22,7 +22,7 @@ cookbook_file '/var/www/login.rantmn.org/web/info.php' do
     mode '0755'
 end
 
-cookbook_file '/var/www/login.rantmn.com/web/knock-knock.html' do
+cookbook_file '/var/www/login.rantmn.org/web/knock-knock.html' do
     owner 'www-data'
     group 'www-data'
     source 'balancer.html'
