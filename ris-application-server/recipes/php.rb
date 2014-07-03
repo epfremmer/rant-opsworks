@@ -54,6 +54,14 @@ package 'php5-pspell' do
     action :install
 end
 
+package 'php5-mongo' do
+    action :install
+end
+
+package 'php5-intl' do
+    action :install
+end
+
 package 'php5-sqlite' do
     action :install
 end
