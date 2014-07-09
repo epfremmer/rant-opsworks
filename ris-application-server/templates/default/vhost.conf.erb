@@ -1,13 +1,13 @@
 server {
     listen 80;
     server_name login.rantmn.org;
-    root /var/www/login.rantmn.org/current/web;
+    root <%= node[:nginx][:doc_root] %>/<%= node[:nginx][:domain] %>;
     index index.php;
     include /etc/nginx/security;
 
     # Logging
-    access_log  /var/log/nginx/login.rantmn.org.access.log;
-    error_log  /var/log/nginx/login.rantmn.org.error.log notice;
+    access_log <%= node[:nginx][:log_dir] %>/<%= node[:nginx][:domain] %>.access.log;
+    error_log <%= node[:nginx][:log_dir] %>/<%= node[:nginx][:domain] %>.error.log notice;
 
     # serve static files directly
     location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
@@ -20,7 +20,7 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php5-fpm/login.rantmn.org.socket;
+        fastcgi_pass unix:/var/run/php5-fpm/<%= .socket;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include /etc/nginx/fastcgi_params;
         send_timeout 1800;
