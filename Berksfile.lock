@@ -1,0 +1,6 @@
+DEPENDENCIES
+  http
+    path: http
+
+GRAPH
+  http (1.0.0)

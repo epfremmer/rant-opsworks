@@ -1,0 +1,4 @@
+/.idea
+/.vagrant
+.kitchen/
+.kitchen.local.yml
