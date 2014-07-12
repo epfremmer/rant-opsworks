@@ -4,14 +4,13 @@ app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vh
 
 ruby_block 'Clear nginx configuration' do
     block do
-        Dir.foreach(dir_path) {|f| fn = File.join(dir_path, f); File.delete(fn) if f != '.' && f != '..'}
+        Dir.foreach("#{nginx_path}/sites-enabled") {|f| fn = File.join("#{nginx_path}/sites-enabled", f); File.delete(fn) if f != '.' && f != '..'}
     end
 end
 
-# Be sure that the vhost folder exists and it's owned by www user
-FileUtils.mkdir_p "#{nginx_path}/sites-enabled"
-
 directory app_web_root do
+    action :create
+    recursive true
     owner node['rant']['deploy_user']
     group node['rant']['deploy_group']
 end
@@ -28,6 +27,10 @@ template "#{nginx_path}/sites-available/#{node['rant']['nginx']['vhost']}" do
     )
 end
 
+link "#{nginx_path}/sites-enabled/#{node['rant']['nginx']['vhost']}" do
+    to "#{nginx_path}/sites-available/#{node['rant']['nginx']['vhost']}"
+end
+
 directory node['rant']['nginx']['web_root'] do
     owner node['rant']['deploy_user']
     owner node['rant']['deploy_group']
@@ -35,7 +38,14 @@ directory node['rant']['nginx']['web_root'] do
     action :create
 end
 
+cookbook_file "index.php" do
+    path "#{app_web_root}/index.php"
+    owner node['rant']['deploy_user']
+    owner node['rant']['deploy_group']
+    mode '0755'
+    action :create_if_missing
+end
+
 service 'nginx' do
-    supports :status => true, :start => true, :stop => true, :restart => true
-    action [ :enable, :restart ]
+    action :restart
 end
