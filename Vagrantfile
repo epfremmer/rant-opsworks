@@ -28,24 +28,17 @@ Vagrant.configure("2") do |config|
   select_vmbox config, OS
   config.vm.define OS do |c|
     c.vm.provision :chef_solo do |chef|
-      chef.add_recipe("http::packages")
-      chef.add_recipe("http::php")
-      chef.add_recipe("http::nginx")
+      chef.add_recipe("cassandra::datastax")
       chef.json = {
-        "rant" => {
-          "deploy_user" => "www-data",
-          "deploy_group" => "www-data",
-          "nginx" => {
-            "vhost" => "csa.rantsports.org",
-            "config_dir" => "/etc/nginx",
-            "web_root" => "/var/www",
-            "log_dir" => "/var/log/nginx"
+        "java" => {
+          "install_flavor" => "oracle",
+          "oracle" => {
+            "accept_oracle_download_terms" => true
           },
-          "php" => {
-            "socket_dir" => "/var/run/php5-fpm",
-            "pool_dir" => "/etc/php5/fpm/pool.d",
-            "log_dir" => "/var/log/php-fpm"
-          }
+          "jdk_version" => "7"
+        },
+        "cassandra" => {
+          "cluster_name" => "rs_cassandra_cluster"
         }
       }
     end

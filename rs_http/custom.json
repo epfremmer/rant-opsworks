@@ -1,0 +1,40 @@
+"rant": {
+    "deploy": {
+        "repository": "https://dlinsmey:D0dgeram@git.nerderylabs.com/RANTSPORTS.api-server",
+        "branch": "master",
+        "user": "www-data",
+        "group": "www-data"
+    },
+    "application": {
+        "name": "comment-server",
+        "environment_vars": {
+            "RANT_APP_ENV_MAILER_TRANSPORT": "smtp",
+            "RANT_APP_ENV_MAILER_HOST": "127.0.0.1",
+            "RANT_APP_ENV_MAILER_USER": "~",
+            "RANT_APP_ENV_MAILER_PASSWORD": "~",
+            "RANT_APP_ENV_LOCALE": "en",
+            "RANT_APP_ENV_SECRET": "QMqVLFXx3NEekpf6DxQcNbRbAbVVBCfTUkss",
+            "RANT_APP_ENV_EMAIL_DEV_DELIVERY": "~",
+            "RANT_APP_ENV_CASSANDRA_DSN": "cassandra:host=127.0.0.1;port=9160",
+            "RANT_APP_ENV_CASSANDRA_KEYSPACE": "rantcomments",
+            "RANT_APP_ENV_STATSINC_API_KEY": "~",
+            "RANT_APP_ENV_STATSINC_SECRET": "~",
+            "RANT_APP_ENV_STATSINC_CACHE_VERSION": "1",
+            "RANT_APP_ENV_STATSINC_SLEEP": "0",
+            "RANT_APP_ENV_AUTHENTICATION_SERVER": "login.rantmn.org",
+            "RANT_APP_ENV_AUTHENTICATION_SERVER_VALIDATE": "api/user",
+            "RANT_APP_ENV_AUTHENTICATION_SERVER_VALIDATE_PARAMETER": "access_token"
+        }
+    },
+    "nginx": {
+        "vhost": "csa.rantsports.org",
+        "config_dir": "/etc/nginx",
+        "web_root": "/var/www",
+        "log_dir": "/var/log/nginx"
+    },
+    "php": {
+        "socket_dir": "/var/run/php5-fpm",
+        "pool_dir": "/etc/php5/fpm/pool.d",
+        "log_dir": "/var/log/php-fpm"
+    }
+}

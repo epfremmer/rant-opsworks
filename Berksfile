@@ -1,3 +1,9 @@
 source "https://supermarket.getchef.com"
 
-cookbook 'http', path: 'http'
+cookbook 'application', '~3.0.0'
+cookbook 'application_php', '~> 2.0.0'
+
+cookbook 'rs_http', path: 'rs_http'
+
+cookbook 'java', '~> 1.22.0'
+cookbook 'cassandra', github: 'michaelklishin/cassandra-chef-cookbook'

@@ -26,8 +26,8 @@ template "#{node['rant']['php']['pool_dir']}/#{node['rant']['nginx']['vhost']}.c
     mode '0500'
     variables(
         :pool_name => node['rant']['nginx']['vhost'],
-        :user => node['rant']['deploy_user'],
-        :group => node['rant']['deploy_group'],
+        :user => node['rant']['deploy']['user'],
+        :group => node['rant']['deploy']['group'],
         :error_log_path => "#{node['rant']['php']['log_dir']}/#{node['rant']['nginx']['vhost']}.error.log",
         :socket_path => node['rant']['php']['socket_dir']
     )
