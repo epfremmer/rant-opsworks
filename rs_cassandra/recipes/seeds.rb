@@ -11,7 +11,7 @@ layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 cluster_ips = []
 
-layer_instances.each do |name, instance| do |n|
+layer_instances.each do |name, instance|
     cluster_ips << instance['private_ip']
 end
 
