@@ -21,5 +21,4 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml"
     group node['cassandra']['group']
     mode  0644
     notifies :restart, "service[cassandra]", :delayed
-  end
 end
