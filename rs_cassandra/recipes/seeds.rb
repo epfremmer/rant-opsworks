@@ -8,7 +8,7 @@
 #
 
 layer_slug_name = node['opsworks']['instance']['layers'].first
-layer_instances = node['opsworks']['layers'][replicaset_layer_slug_name]['instances']
+layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 cluster_ips = []
 
 layer_instances.each_index do |n|
