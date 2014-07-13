@@ -11,8 +11,8 @@ layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 cluster_ips = []
 
-layer_instances.each_index do |n|
-    cluster_ips << members[n]['ipaddress']
+layer_instances.each do |name, instance| do |n|
+    cluster_ips << instance['private_ip']
 end
 
 template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
