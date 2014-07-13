@@ -21,4 +21,7 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     group node['cassandra']['group']
     mode  0644
     notifies :restart, "service[cassandra]", :delayed
+    variables(
+        :seed_ips => cluster_ips
+    )
 end
