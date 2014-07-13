@@ -15,7 +15,7 @@ layer_instances.each_index do |n|
     cluster_ips << members[n]['ipaddress']
 end
 
-template "#{node['cassandra']['conf_dir']}/cassandra.yaml"
+template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     source "cassandra.yaml.erb"
     owner node['cassandra']['user']
     group node['cassandra']['group']
