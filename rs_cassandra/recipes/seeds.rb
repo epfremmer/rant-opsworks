@@ -12,7 +12,8 @@ layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 cluster_ips = []
 
 layer_instances.each do |name, instance|
-    cluster_ips << instance['private_ip']
+    log "Cassandra cluster #{instance['ipaddress']}"
+    cluster_ips << instance['ipaddress']
 end
 
 service "cassandra" do
