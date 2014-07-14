@@ -44,7 +44,7 @@ initial_token: <%= node[:cassandra][:initial_token] %>
 <% end %>
 
 # See http://wiki.apache.org/cassandra/HintedHandoff
-hinted_handoff_enabled: <%= cassandra_bool_config(node[:cassandra][:hinted_handoff_enabled]) %>
+hinted_handoff_enabled: <%= rs_cassandra_bool_config(node[:cassandra][:hinted_handoff_enabled]) %>
 # this defines the maximum amount of time a dead host will have hints
 # generated.  After it has been dead this long, new hints for it will not be
 # created until it has been seen alive and gone down again.
@@ -307,7 +307,7 @@ memtable_flush_queue_size: <%= node[:cassandra][:memtable_flush_queue_size] %>
 # buffers. Enable this to avoid sudden dirty buffer flushing from
 # impacting read latencies. Almost always a good idea on SSD:s; not
 # necessarily on platters.
-trickle_fsync: <%= cassandra_bool_config(node[:cassandra][:trickle_fsync]) %>
+trickle_fsync: <%= rs_cassandra_bool_config(node[:cassandra][:trickle_fsync]) %>
 trickle_fsync_interval_in_kb: <%= node[:cassandra][:trickle_fsync_interval_in_kb] %>
 
 # TCP port, for commands and data
@@ -338,7 +338,7 @@ broadcast_address: <%= node[:cassandra][:broadcast_address] %>
 # transport is considered beta.
 # Please note that the address on which the native transport is bound is the
 # same as the rpc_address. The port however is different and specified below.
-start_native_transport: <%= cassandra_bool_config(node[:cassandra][:start_native_transport]) %>
+start_native_transport: <%= rs_cassandra_bool_config(node[:cassandra][:start_native_transport]) %>
 # port for the CQL native transport to listen for clients on
 native_transport_port: <%= node[:cassandra][:native_transport_port] %>
 # The minimum and maximum threads for handling requests when the native
@@ -350,7 +350,7 @@ native_transport_port: <%= node[:cassandra][:native_transport_port] %>
 
 
 # Whether to start the thrift rpc server.
-start_rpc: <%= cassandra_bool_config(node[:cassandra][:start_rpc]) %>
+start_rpc: <%= rs_cassandra_bool_config(node[:cassandra][:start_rpc]) %>
 # The address to bind the Thrift RPC service to -- clients connect
 # here. Unlike ListenAddress above, you *can* specify 0.0.0.0 here if
 # you want Thrift to listen on all interfaces.
@@ -362,7 +362,7 @@ rpc_address: <%= node[:cassandra][:rpc_address] %>
 rpc_port: <%= node[:cassandra][:rpc_port] %>
 
 # enable or disable keepalive on rpc connections
-rpc_keepalive: <%= cassandra_bool_config(node[:cassandra][:rpc_keepalive]) %>
+rpc_keepalive: <%= rs_cassandra_bool_config(node[:cassandra][:rpc_keepalive]) %>
 
 # Cassandra provides three out-of-the-box options for the RPC Server:
 #
@@ -429,13 +429,13 @@ incremental_backups: <%= node[:cassandra][:incremental_backups] %>
 # careful using this option, since Cassandra won't clean up the
 # snapshots for you.  Mostly useful if you're paranoid when there
 # is a data format change.
-snapshot_before_compaction: <%= cassandra_bool_config(node[:cassandra][:snapshot_before_compaction]) %>
+snapshot_before_compaction: <%= rs_cassandra_bool_config(node[:cassandra][:snapshot_before_compaction]) %>
 
 # Whether or not a snapshot is taken of the data before keyspace truncation
 # or dropping of column families. The STRONGLY advised default of true
 # should be used to provide data safety. If you set this flag to false, you will
 # lose data on truncation or drop.
-auto_snapshot: <%= cassandra_bool_config(node[:cassandra][:auto_snapshot]) %>
+auto_snapshot: <%= rs_cassandra_bool_config(node[:cassandra][:auto_snapshot]) %>
 
 # Add column indexes to a row after its contents reach this size.
 # Increase if your column values are large, or if you have a very large
@@ -469,7 +469,7 @@ in_memory_compaction_limit_in_mb: <%= node[:cassandra][:in_memory_compaction_lim
 # This is usually only useful for SSD-based hardware: otherwise,
 # your concern is usually to get compaction to do LESS i/o (see:
 # compaction_throughput_mb_per_sec), not more.
-multithreaded_compaction: <%= cassandra_bool_config(node[:cassandra][:multithreaded_compaction]) %>
+multithreaded_compaction: <%= rs_cassandra_bool_config(node[:cassandra][:multithreaded_compaction]) %>
 
 # Throttles compaction to the given total throughput across the entire
 # system. The faster you insert data, the faster you need to compact in
@@ -482,7 +482,7 @@ compaction_throughput_mb_per_sec: <%= node[:cassandra][:compaction_throughput_mb
 # Track cached row keys during compaction, and re-cache their new
 # positions in the compacted sstable.  Disable if you use really large
 # key caches.
-compaction_preheat_key_cache: <%= cassandra_bool_config(node[:cassandra][:compaction_preheat_key_cache]) %>
+compaction_preheat_key_cache: <%= rs_cassandra_bool_config(node[:cassandra][:compaction_preheat_key_cache]) %>
 
 # Throttles all outbound streaming file transfers on this node to the
 # given total throughput in Mbps. This is necessary because Cassandra does
@@ -510,7 +510,7 @@ request_timeout_in_ms: <%= node[:cassandra][:request_timeout_in_ms] %>
 #
 # Warning: before enabling this property make sure to ntp is installed
 # and the times are synchronized between the nodes.
-cross_node_timeout: <%= cassandra_bool_config(node[:cassandra][:cross_node_timeout]) %>
+cross_node_timeout: <%= rs_cassandra_bool_config(node[:cassandra][:cross_node_timeout]) %>
 
 # Enable socket timeout for streaming operation.
 # When a timeout occurs during streaming, streaming is retried from the start
