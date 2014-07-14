@@ -16,6 +16,7 @@
 # Iterate through the Cassandra layer collecting the instance IP addresses
 #
 
+app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 layer_slug_name = node['rant']['deploy']['db_layer_name']
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 dsn_entries =[]
@@ -25,7 +26,7 @@ layer_instances.each do |name, instance|
   dsn_entries << "host=#{instance['private_ip']};port=#{node['cassandra']['rpc_port']}"
 end
 
-template "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}/current/app/config/cassandra_cluster.yml" do
+template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   source "cassandra_cluster.yml.erb"
   owner node['rant']['deploy']['user']
   group node['rant']['deploy']['group']
@@ -35,3 +36,9 @@ template "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}
   )
 end
 
+bash "install_application" do
+    cwd "#{app_web_root}/current"
+    code <<-EOH
+        app/console cache:clear --env=#{node['rant']['application']['environment_name']}
+    EOH
+end
