@@ -15,6 +15,12 @@ layer_instances.each do |name, instance|
     cluster_ips << instance['private_ip']
 end
 
+service "cassandra" do
+  supports :restart => true, :status => true
+  service_name "cassandra"
+  action [:enable, :start]
+end
+
 template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     source "cassandra.yaml.erb"
     owner node['cassandra']['user']
@@ -24,10 +30,4 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     variables(
         :seed_ips => cluster_ips.join(",")
     )
-end
-
-service "cassandra" do
-  supports :restart => true, :status => true
-  service_name node.cassandra.service_name
-  action [:enable, :start]
 end
