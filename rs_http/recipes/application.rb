@@ -24,3 +24,8 @@ bash "install_application" do
         bin/composer install --no-dev --verbose --prefer-dist --optimize-autoloader --no-interaction -vvv
     EOH
 end
+
+directory "#{app_web_root}/current" do
+    owner node['rant']['deploy']['user']
+    group node['rant']['deploy']['group']
+end
