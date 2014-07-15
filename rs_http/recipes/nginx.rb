@@ -25,7 +25,7 @@ template "#{nginx_path}/sites-available/#{node['rant']['nginx']['vhost']}" do
         :access_log_path => "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vhost']}.access.log",
         :socket_path => node['rant']['php']['socket_dir'],
         :environment_name => node['rant']['application']['environment_name'],
-        :env_vars => node['nginx']['env_vars']
+        :env_vars => node['rant']['nginx']['env_vars']
     )
 end
 
