@@ -33,6 +33,11 @@ template "#{node['rant']['php']['pool_dir']}/#{node['rant']['nginx']['vhost']}.c
     )
 end
 
+link "/etc/php5/fpm/conf.d/20-mcrypt.ini" do
+    to "/etc/php5/mods-available/mcrypt.ini"
+    only_if "test -L /etc/php5/mods-available/mcrypt.ini"
+end
+
 service 'php5-fpm' do
     provider Chef::Provider::Service::Upstart
     supports :restart => true
