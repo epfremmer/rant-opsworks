@@ -34,7 +34,9 @@ server {
         fastcgi_read_timeout 1800;
 
         <%= @env_vars.each do |key, value| -%>
+        <% unless value.empty? -%>
         fastcgi_param <%= key %> <%= value %>;
-        <%= end -%>
+        <% end %>
+        <% end %>
     }
 }
