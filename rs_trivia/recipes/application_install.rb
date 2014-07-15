@@ -9,6 +9,24 @@ application node['rant']['application']['name'] do
     revision node['rant']['deploy']['branch']
 end
 
+directory "#{app_web_root}/current/craft/app" do
+    owner node['rant']['deploy']['user']
+    group node['rant']['deploy']['group']
+    mode 0744
+end
+
+directory "#{app_web_root}/current/craft/config" do
+    owner node['rant']['deploy']['user']
+    group node['rant']['deploy']['group']
+    mode 0744
+end
+
+directory "#{app_web_root}/current/craft/storage" do
+    owner node['rant']['deploy']['user']
+    group node['rant']['deploy']['group']
+    mode 0744
+end
+
 directory "#{app_web_root}/current" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']

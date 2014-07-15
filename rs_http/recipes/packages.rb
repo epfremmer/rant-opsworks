@@ -35,6 +35,14 @@ package "php5-gd" do
     action :install
 end
 
+package "php5-mcrypt" do
+    action :install
+end
+
+package "php5-mysql"
+    action :install
+end
+
 package "php5-intl" do
     action :install
 end

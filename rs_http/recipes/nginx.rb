@@ -20,11 +20,12 @@ template "#{nginx_path}/sites-available/#{node['rant']['nginx']['vhost']}" do
     mode '0700'
     variables(
         :vhost => node['rant']['nginx']['vhost'],
-        :root_path => "#{app_web_root}/current/web",
+        :root_path => "#{app_web_root}/current/#{node['nginx']['web_sub_dir']}",
         :error_log_path => "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vhost']}.error.log",
         :access_log_path => "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vhost']}.access.log",
         :socket_path => node['rant']['php']['socket_dir'],
-        :environment_name => node['rant']['application']['environment_name']
+        :environment_name => node['rant']['application']['environment_name'],
+        :env_vars => node['nginx']['env_vars']
     )
 end
 

@@ -32,6 +32,11 @@ server {
         include fastcgi_params;
         send_timeout 1800;
         fastcgi_read_timeout 1800;
-        fastcgi_param APPLICATION_ENV <%= @environment_name %>;
+
+        <%= @env_vars.each do |key, value| %>
+        <% unless value.empty? %>
+        fastcgi_param <%= key %> <%= value %>;
+        <% end %>
+        <%= end %>
     }
 }
