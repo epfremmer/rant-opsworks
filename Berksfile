@@ -2,8 +2,11 @@ source "https://supermarket.getchef.com"
 
 cookbook 'application', '~3.0.0'
 cookbook 'application_php', '~> 2.0.0'
-
-cookbook 'rs_http', path: 'rs_http'
-
 cookbook 'java', '~> 1.22.0'
 cookbook 'cassandra', github: 'michaelklishin/cassandra-chef-cookbook'
+cookbook 'mongodb', '~> 0.16.1'
+
+cookbook 'rs_http', path: 'rs_http'
+cookbook 'rs_trivia', path: 'rs_trivia'
+cookbook 'rs_mongodb', path: 'rs_mongodb'
+cookbook 'rs_auth', path: 'rs_auth'
