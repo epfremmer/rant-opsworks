@@ -23,7 +23,7 @@ dsn_entries =[]
 
 layer_instances.each do |name, instance|
   log "Cassandra cluster #{instance['private_ip']}"
-  dsn_entries << "#{instance['private_ip']}:#{node['cassandra']['rpc_port']}"
+  dsn_entries << "#{instance['private_ip']}:#{node['mongodb']['config']['port']}"
 end
 
 template "#{app_web_root}/current/app/config/dynamic.yml" do

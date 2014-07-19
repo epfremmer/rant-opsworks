@@ -1,2 +1,5 @@
-include_recipe "mongodb::10gen_repo"
-include_recipe "mongodb::replicaset"
+Log "Running my recipe..."
+
+Package "build-essential" do
+    action :install
+end

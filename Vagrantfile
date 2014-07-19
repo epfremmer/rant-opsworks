@@ -28,18 +28,20 @@ Vagrant.configure("2") do |config|
   select_vmbox config, OS
   config.vm.define OS do |c|
     c.vm.provision :chef_solo do |chef|
-      chef.add_recipe("cassandra::datastax")
+      chef.verbose_logging = true
+      chef.add_recipe("rs_mongodb::default")
+      chef.add_recipe("mongodb::replicaset")
       chef.json = {
-        "java" => {
-          "install_flavor" => "oracle",
-          "oracle" => {
-            "accept_oracle_download_terms" => true
-          },
-          "jdk_version" => "7"
+        "build-essential" => {
+          "compile_time" => true
         },
-        "cassandra" => {
-          "cluster_name" => "rs_cassandra_cluster"
-        }
+        "mongodb" => {
+          "config" => {
+            "port" => "27017",
+            "replSet" => "rs_mongodb"
+          },
+          "cluster_name" => "rs_mongodb_cluster"
+        },
       }
     end
     c.vm.network :forwarded_port, guest: 80, host: 8888
