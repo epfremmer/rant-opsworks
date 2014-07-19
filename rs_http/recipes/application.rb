@@ -28,4 +28,5 @@ end
 directory "#{app_web_root}/current" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']
+    recursive true
 end
