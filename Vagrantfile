@@ -29,8 +29,6 @@ Vagrant.configure("2") do |config|
   config.vm.define OS do |c|
     c.vm.provision :chef_solo do |chef|
       chef.verbose_logging = true
-      chef.add_recipe("rs_mongodb::default")
-      chef.add_recipe("mongodb::replicaset")
       chef.json = {
         "build-essential" => {
           "compile_time" => true

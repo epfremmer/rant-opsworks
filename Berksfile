@@ -4,6 +4,7 @@ cookbook 'rs_http', path: 'rs_http'
 cookbook 'rs_trivia', path: 'rs_trivia'
 cookbook 'rs_mongodb', path: 'rs_mongodb'
 cookbook 'rs_auth', path: 'rs_auth'
+cookbook 'rs_cassandra', path: 'rs_cassandra'
 
 cookbook 'build-essential', '~> 2.0.4'
 cookbook 'application', '~3.0.0'

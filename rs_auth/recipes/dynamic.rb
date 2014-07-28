@@ -22,7 +22,7 @@ layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 dsn_entries =[]
 
 layer_instances.each do |name, instance|
-  log "Cassandra cluster #{instance['private_ip']}"
+  log "MongoDB cluster #{instance['private_ip']}"
   dsn_entries << "#{instance['private_ip']}:#{node['mongodb']['config']['port']}"
 end
 
@@ -39,6 +39,7 @@ end
 bash "install_application" do
     cwd "#{app_web_root}/current"
     code <<-EOH
-        app/console cache:clear --env=#{node['rant']['application']['environment_name']}
+        sudo app/console cache:clear --env=#{node['rant']['application']['environment_name']}
+        sudo chmod -R #{node['rant']['deploy']['user']}:#{node['rant']['deploy']['group']} ./
     EOH
 end
