@@ -27,6 +27,7 @@ template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   mode 0644
   variables(
     :instances => layer_instances
+    :port => node['rant']['cassandra']['port']
   )
 end
 
