@@ -1,2 +1,5 @@
-parameters:
-    rant.cassandra.dsn: cassandra:<%= @dsn %>
+nerdery_cassandra:
+    nodes:
+        <% @instances.each do |instance| -%>
+        - { host: <%= instance['private_ip'], port: <%= instance['cassandra']['rpc_port'] %> }
+        <% end -%>

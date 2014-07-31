@@ -19,12 +19,6 @@
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 layer_slug_name = node['rant']['deploy']['db_layer_name']
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
-dsn_entries =[]
-
-layer_instances.each do |name, instance|
-  log "Cassandra cluster #{instance['private_ip']}"
-  dsn_entries << "host=#{instance['private_ip']};port=#{node['cassandra']['rpc_port']}"
-end
 
 template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   source "cassandra_cluster.yml.erb"
@@ -32,7 +26,7 @@ template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   group node['rant']['deploy']['group']
   mode 0644
   variables(
-    :dsn => dsn_entries.join(",")
+    :instances => layer_instances
   )
 end
 
