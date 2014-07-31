@@ -40,6 +40,6 @@ bash "install_application" do
     cwd "#{app_web_root}/current"
     code <<-EOH
         sudo app/console cache:clear --env=#{node['rant']['application']['environment_name']}
-        sudo chmod -R #{node['rant']['deploy']['user']}:#{node['rant']['deploy']['group']} ./
+        sudo chown -R #{node['rant']['deploy']['user']}:#{node['rant']['deploy']['group']} ./
     EOH
 end
