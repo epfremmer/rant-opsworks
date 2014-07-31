@@ -26,7 +26,7 @@ template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   group node['rant']['deploy']['group']
   mode 0644
   variables(
-    :instances => layer_instances
+    :instances => layer_instances,
     :port => node['rant']['cassandra']['port']
   )
 end
