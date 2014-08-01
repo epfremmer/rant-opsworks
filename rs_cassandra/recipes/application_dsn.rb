@@ -20,13 +20,20 @@ app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vh
 layer_slug_name = node['rant']['deploy']['db_layer_name']
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 
+cluster_nodes = []
+
+layer_instances.each do |name, instance|
+  log "Cassandra cluster #{instance['private_ip']}"
+  cluster_nodes << instance['private_ip']
+end
+
 template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
   source "cassandra_cluster.yml.erb"
   owner node['rant']['deploy']['user']
   group node['rant']['deploy']['group']
   mode 0644
   variables(
-    :instances => layer_instances,
+    :instances => cluster_nodes,
     :port => node['rant']['cassandra']['port']
   )
 end
