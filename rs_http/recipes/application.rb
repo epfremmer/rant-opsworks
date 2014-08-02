@@ -30,3 +30,9 @@ directory "#{app_web_root}/current" do
     group node['rant']['deploy']['group']
     recursive true
 end
+
+service 'php5-fpm' do
+    provider Chef::Provider::Service::Upstart
+    supports :restart => true
+    action :restart
+end
