@@ -1,3 +1,13 @@
+#
+# Cookbook Name:: rs_http
+# Recipe:: application
+#
+# Copyright 2014, Rant Media Network
+#
+# All rights reserved - Do Not Redistribute
+#
+# encoding: UTF-8
+
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 
 application node['rant']['application']['name'] do
