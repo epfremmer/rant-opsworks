@@ -8,6 +8,8 @@
 #
 # encoding: UTF-8
 
+Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
+
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 
 application node['rant']['application']['name'] do
