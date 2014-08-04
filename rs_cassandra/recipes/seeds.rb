@@ -15,6 +15,7 @@
 
 layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
+dc_name = node['cassandra']['dc_name']
 cluster_ips = []
 
 layer_instances.each do |name, instance|
@@ -36,5 +37,16 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     notifies :restart, "service[cassandra]", :delayed
     variables(
         :seed_ips => cluster_ips.join(",")
+    )
+end
+
+template "#{node['cassandra']['conf_dir']}/cassandra-topology.yaml" do
+    source "cassandra-topology.yaml.erb"
+    owner node['cassandra']['user']
+    group node['cassandra']['group']
+    mode  0644
+    notifies :restart, "service[cassandra]", :delayed
+    variables(
+        :dc_name => "#{app_web_root}"
     )
 end
