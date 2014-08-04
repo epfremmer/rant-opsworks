@@ -6,9 +6,9 @@
 #
 # Proprietary license.
 #
-# This recipe should be run on all HTTP/PHP servers when a Cassandra instance
-# either comes online or goes offline. This recipe changes the Cassandra
-# connection DSN.
+# This recipe should be run on all HTTP/PHP & Cron servers when a Cassandra
+# instance either comes online or goes offline. This recipe changes the
+# Cassandra connection DSN.
 #
 
 
