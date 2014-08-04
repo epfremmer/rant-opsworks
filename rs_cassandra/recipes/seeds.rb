@@ -47,6 +47,6 @@ template "#{node['cassandra']['conf_dir']}/cassandra-topology.yaml" do
     mode  0644
     notifies :restart, "service[cassandra]", :delayed
     variables(
-        :dc_name => "#{app_web_root}"
+        :dc_name => "#{dc_name}"
     )
 end
