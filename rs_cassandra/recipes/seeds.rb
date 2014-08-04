@@ -50,3 +50,14 @@ template "#{node['cassandra']['conf_dir']}/cassandra-topology.yaml" do
         :dc_name => "#{dc_name}"
     )
 end
+
+template "#{node['cassandra']['conf_dir']}/cassandra-topology.properties" do
+    source "cassandra-topology.properties.erb"
+    owner node['cassandra']['user']
+    group node['cassandra']['group']
+    mode  0644
+    notifies :restart, "service[cassandra]", :delayed
+    variables(
+        :dc_name => "#{dc_name}"
+    )
+end

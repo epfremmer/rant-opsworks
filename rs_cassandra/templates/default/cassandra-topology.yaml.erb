@@ -4,7 +4,7 @@
 # The topology, as a list of data centers.
 topology:
     # Each data center has a name and a list of racks.
-    - dc_name: "<%= @dc_name %>"
+    - dc_name: <%= @dc_name %>
       racks:
           # Each rack has a name and a list of nodes.
           - rack_name: c1
