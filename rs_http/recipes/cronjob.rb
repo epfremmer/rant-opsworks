@@ -19,6 +19,6 @@ cron "leaderboard_cron" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console rant:comments:userleaderboard:build >> #{log_file} 2>&1"
+  command "#{app_web_root}/current/app/console --env=staging rant:comments:userleaderboard:build >> #{log_file} 2>&1"
   user "root"
 end
