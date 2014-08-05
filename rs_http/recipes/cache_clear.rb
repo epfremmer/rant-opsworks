@@ -13,6 +13,8 @@
 
 Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
 
+app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
+
 bash "app_cache_clear" do
     cwd "#{app_web_root}/current"
     code <<-EOH
