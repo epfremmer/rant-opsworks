@@ -18,7 +18,7 @@ app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vh
 bash "app_cache_clear" do
     cwd "#{app_web_root}/current"
     code <<-EOH
-        sudo app/console --env=staging redis:flushall
+        sudo app/console --env=staging redis:flushall --no-interaction
     EOH
 end
 
