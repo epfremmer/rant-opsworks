@@ -15,10 +15,6 @@ package "curl" do
     action :install
 end
 
-package "sendmail" do
-    action :install
-end
-
 package "php5-fpm" do
     action :install
 end
