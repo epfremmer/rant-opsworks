@@ -19,6 +19,7 @@ package "sendmail" do
 end
 
 cron "swiftmailer_spool_cron" do
+  minute "*"
   action :create
   command "#{app_web_root}/current/app/console --env=staging swiftmailer:spool:send >> #{log_file} 2>&1"
   user "root"
