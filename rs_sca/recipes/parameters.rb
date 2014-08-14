@@ -15,7 +15,7 @@ Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
 
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 
-template "#{app_web_root}/current/config/parameters.yml.dist" do
+template "#{app_web_root}/current/app/config/parameters.yml.dist" do
     source 'parameters.yml.dist.erb'
     variables(
         :auth_endpoint  => node['rant']['application']['environment_vars']['RANT_APP_ENV_AUTHENTICATION_SERVER_AUTH'],
