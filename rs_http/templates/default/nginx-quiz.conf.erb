@@ -4,7 +4,7 @@ server {
     error_log <%= @error_log_path %>;
     log_format  main  '$remote_addr $host $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_time';
     access_log <%= @access_log_path %> main;
-    rewrite ^/index\.php/?(.*)$ /$1 permanent;
+    #rewrite ^/index\.php/?(.*)$ /$1 permanent;
 
     gzip_vary on;
     gzip_proxied any;
@@ -26,7 +26,7 @@ server {
     }
 
     location ~ ^(.*)$ {
-          try_files $uri $uri/ /index.php?p=$uri&$args;
+        try_files $uri $uri/ /index.php?p=$uri&$args;
     }
 
     location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
