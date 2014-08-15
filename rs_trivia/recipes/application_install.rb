@@ -12,22 +12,27 @@ end
 directory "#{app_web_root}/current/craft/app" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']
-    mode 0744
+    mode 0755
 end
 
 directory "#{app_web_root}/current/craft/config" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']
-    mode 0744
+    mode 0755
 end
 
 directory "#{app_web_root}/current/craft/storage" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']
-    mode 0744
+    mode 0755
 end
 
 directory "#{app_web_root}/current" do
     owner node['rant']['deploy']['user']
     group node['rant']['deploy']['group']
+end
+
+link "/etc/php5/fpm/conf.d/20-mcrypt.ini" do
+    to "/etc/php5/mods-available/mcrypt.ini"
+    only_if "test -L /etc/php5/mods-available/mcrypt.ini"
 end
