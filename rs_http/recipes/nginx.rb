@@ -16,7 +16,7 @@ directory app_web_root do
 end
 
 template "#{nginx_path}/sites-available/#{node['rant']['nginx']['vhost']}" do
-    source 'nginx.conf.erb'
+    source "nginx#{node['rant']['nginx']['conf_type']}.conf.erb"
     mode '0700'
     variables(
         :vhost => node['rant']['nginx']['vhost'],

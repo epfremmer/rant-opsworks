@@ -1,0 +1,45 @@
+server {
+    server_name <%= @vhost %>;
+    root <%= @root_path %>;
+    error_log <%= @error_log_path %>;
+    log_format  main  '$remote_addr $host $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_time';
+    access_log <%= @access_log_path %> main;
+    rewrite ^/index\.php/?(.*)$ /$1 permanent;
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:<%= @socket_path %>/<%= @vhost %>.socket;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        <% @env_vars.each do |key, value| -%>
+        <% unless value.empty? -%>
+        fastcgi_param <%= key %> <%= value %>;
+        <% end -%>
+        <% end -%>
+    }
+
+    location ~ ^(.*)$ {
+          try_files $uri $uri/ /index.php?p=$uri&$args;
+    }
+
+    location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~ ^/admin.* {
+        fastcgi_read_timeout   300;
+    }
+
+    location = /robots.txt  { access_log off; log_not_found off; }
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location ~ /\. { access_log off; log_not_found off; deny all; }
+}
