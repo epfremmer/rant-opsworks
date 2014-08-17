@@ -16,8 +16,7 @@
 layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 
-snitch_type = "Ec2MultiRegionSnitch"
-dc_name     = node['cassandra']['dc_name']
+dc_name = node['cassandra']['dc_name']
 cluster_ips = []
 
 layer_instances.each do |name, instance|

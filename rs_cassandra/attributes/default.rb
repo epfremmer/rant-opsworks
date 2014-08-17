@@ -42,8 +42,8 @@ default[:cassandra] = {
   :trickle_fsync_interval_in_kb         => 10240,
   :storage_port                         => 7000,
   :ssl_storage_port                     => 7001,
-  :listen_address                       => node[:ipaddress],
-  :broadcast_address                    => node[:ipaddress],
+  :listen_address                       => node[:test],
+  :broadcast_address                    => node['opsworks']['instance']['ip'],
   :start_native_transport               => true,
   :native_transport_port                => "9042",
   :start_rpc                            => true,
@@ -68,7 +68,7 @@ default[:cassandra] = {
   :request_timeout_in_ms                => 10000,
   :cross_node_timeout                   => false,
   :streaming_socket_timeout_in_ms       => 0, #never timeout streams
-  :snitch                               => 'SimpleSnitch',  # endpoint_snitch config
+  :snitch                               => 'Ec2MultiRegionSnitch',  # endpoint_snitch config
   :dynamic_snitch_update_interval_in_ms => 100,
   :dynamic_snitch_reset_interval_in_ms  => 600000,
   :dynamic_snitch_badness_threshold     => 0.1,
@@ -79,7 +79,7 @@ default[:cassandra] = {
   :heap_new_size    => nil,
   :xss              => "256k",
   :vnodes           => false,
-  :seeds            => [node[:ipaddress]],
+  :seeds            => [node['opsworks']['instance']['ip']],
   :package_name     => 'dsc20',
   :release          => '2',
   :snitch_conf      => false,
@@ -88,7 +88,7 @@ default[:cassandra] = {
   :auto_bootstrap => true,
   :stream_throughput_outbound_megabits_per_sec => 400
 }
-Chef::Log.info(node)
+
 default[:cassandra][:jna] = {
     :base_url => "https://github.com/twall/jna/raw/4.0/dist",
     :jar_name => "jna.jar",
