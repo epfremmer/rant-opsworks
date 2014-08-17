@@ -28,7 +28,9 @@ layer_instances.each do |name, instance|
 end
 
 log "Snitch IP #{snitch_instance['ip']}"
-log node
+log node['opsworks']['instance']'ip']
+log node['opsworks']['instance']'private_ip']
+log node[:ipaddress]
 
 #cluster_ips << snitch_instance['ip']
 
