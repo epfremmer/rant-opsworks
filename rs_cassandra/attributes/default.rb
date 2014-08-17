@@ -88,7 +88,7 @@ default[:cassandra] = {
   :auto_bootstrap => true,
   :stream_throughput_outbound_megabits_per_sec => 400
 }
-
+Chef::Log.info(node)
 default[:cassandra][:jna] = {
     :base_url => "https://github.com/twall/jna/raw/4.0/dist",
     :jar_name => "jna.jar",

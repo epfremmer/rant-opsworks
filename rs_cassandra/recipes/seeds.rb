@@ -15,13 +15,19 @@
 
 layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
+snitch_instance = node['opsworks']['layers']['cassandra-snitch']['instances'].first
+snitch_type     = "Ec2MultiRegionSnitch"
+
 dc_name = node['cassandra']['dc_name']
+
 cluster_ips = []
 
 layer_instances.each do |name, instance|
-  log "Cassandra cluster #{instance['private_ip']}"
-  cluster_ips << instance['private_ip']
+  log "Cassandra cluster #{instance['ip']}"
+  cluster_ips << instance['ip']
 end
+
+cluster_ips << snitch_instance['ip']
 
 service "cassandra" do
   supports :restart => true, :status => true
@@ -36,7 +42,8 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     mode  0644
     notifies :restart, "service[cassandra]", :delayed
     variables(
-        :seed_ips => cluster_ips.join(",")
+        :seed_ips => cluster_ips.join(","),
+        :snitch   => snitch_type
     )
 end
 
