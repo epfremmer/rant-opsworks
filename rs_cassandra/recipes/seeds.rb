@@ -27,9 +27,10 @@ layer_instances.each do |name, instance|
   cluster_ips << instance['ip']
 end
 
+log "Snitch IP #{snitch_instance['ip']}"
+log node
+
 #cluster_ips << snitch_instance['ip']
-Chef::Log.info(node)
-Chef::log.info(snitch_instance['ip'])
 
 service "cassandra" do
   supports :restart => true, :status => true
