@@ -15,24 +15,15 @@
 
 layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
-snitch_instance = node['opsworks']['layers']['cassandra-snitch']['instances'].first
-snitch_type     = "Ec2MultiRegionSnitch"
 
-dc_name = node['cassandra']['dc_name']
-
+snitch_type = "Ec2MultiRegionSnitch"
+dc_name     = node['cassandra']['dc_name']
 cluster_ips = []
 
 layer_instances.each do |name, instance|
   log "Cassandra cluster #{instance['ip']}"
   cluster_ips << instance['ip']
 end
-
-log "Snitch IP #{snitch_instance['ip']}"
-log node['opsworks']['instance']'ip']
-log node['opsworks']['instance']'private_ip']
-log node[:ipaddress]
-
-#cluster_ips << snitch_instance['ip']
 
 service "cassandra" do
   supports :restart => true, :status => true
