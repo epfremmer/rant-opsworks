@@ -37,8 +37,7 @@ template "#{node['cassandra']['conf_dir']}/cassandra.yaml" do
     mode  0644
     notifies :restart, "service[cassandra]", :delayed
     variables(
-        :seed_ips => cluster_ips.join(","),
-        :snitch   => snitch_type
+        :seed_ips => cluster_ips.join(",")
     )
 end
 
