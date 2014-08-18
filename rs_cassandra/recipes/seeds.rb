@@ -28,8 +28,10 @@ package "python-pip" do
     action :install
 end
 
-package "awscli" do
-    action :install
+bash "app_cache_clear" do
+    code <<-EOH
+        sudo pip-install awscli
+    EOH
 end
 
 template "~/.aws/config" do
