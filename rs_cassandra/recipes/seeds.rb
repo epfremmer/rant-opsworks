@@ -51,7 +51,7 @@ bash "app_cache_clear" do
     environment ({'AWS_ACCESS_KEY_ID' => "#{aws_access_key_id}", 'AWS_SECRET_ACCESS_KEY' => "#{aws_secret_access_key}"})
 
     code <<-EOH
-        sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json &> #{results}
+        sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json > #{results}
     EOH
 end
 
@@ -62,7 +62,7 @@ end
 ruby_block "Results" do
     only_if { ::File.exists?(results) }
 
-    instances = File.read(results)
+    instances = JSON.parse(File.read(results))
 
     instances['Reservations'].each do |index, instance|
       if instance['Tags'].detect {|tag| tag['key'] == "opsworks:layer:cassandra"}
