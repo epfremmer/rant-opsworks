@@ -40,14 +40,14 @@ template "~/.aws/config" do
     variables()
 end
 
-instances = `aws ec2 describe-instances`
+#instances = `aws ec2 describe-instances`
 
-instances['Reservations'].each do |index, instance|
-  if instance['Tags'].detect {|tag| tag['key'] == "opsworks:layer:cassandra"}
-    cluster_ips << instance['PublicIpAddress']
-    log "Cassandra cluster #{instance['PublicIpAddress']}"
-  end
-end
+#instances['Reservations'].each do |index, instance|
+#  if instance['Tags'].detect {|tag| tag['key'] == "opsworks:layer:cassandra"}
+#    cluster_ips << instance['PublicIpAddress']
+#    log "Cassandra cluster #{instance['PublicIpAddress']}"
+#  end
+#end
 
 service "cassandra" do
   supports :restart => true, :status => true
