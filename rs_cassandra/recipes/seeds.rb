@@ -19,9 +19,32 @@ layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 dc_name = node['cassandra']['dc_name']
 cluster_ips = []
 
-layer_instances.each do |name, instance|
-  log "Cassandra cluster #{instance['ip']}"
-  cluster_ips << instance['ip']
+#layer_instances.each do |name, instance|
+#  log "Cassandra cluster #{instance['ip']}"
+#  cluster_ips << instance['ip']
+#end
+
+package "python-pip" do
+    action :install
+end
+
+package "awscli" do
+    action :install
+end
+
+template "~/.aws/config" do
+    source "awscli.config.erb"
+    mode  0644
+    variables()
+end
+
+instances = `aws ec2 describe-instances`
+
+instances['Reservations'].each do |index, instance|
+  if instance['Tags'].detect {|tag| tag['key'] == "opsworks:layer:cassandra"}
+    cluster_ips << instance['PublicIpAddress']
+    log "Cassandra cluster #{instance['PublicIpAddress']}"
+  end
 end
 
 service "cassandra" do
