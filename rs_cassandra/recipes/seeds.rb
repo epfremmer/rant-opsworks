@@ -32,6 +32,7 @@ package "python-pip" do
 end
 
 include_recipe "python"
+require 'json'
 
 python_pip "awscli"
 
@@ -41,9 +42,35 @@ python_pip "awscli"
 #log `printenv AWS_ACCESS_KEY_ID`
 #log `printenv AWS_SECRET_ACCESS_KEY`
 
-`export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
-`export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
-instances = `sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json`
+results = "/tmp/instances.json"
+
+bash "app_cache_clear" do
+    user "root"
+    cwd "/tmp"
+
+    environment ({'AWS_ACCESS_KEY_ID' => "#{aws_access_key_id}", 'AWS_SECRET_ACCESS_KEY' => "#{aws_secret_access_key}"})
+
+    code <<-EOH
+        sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json &> #{results}
+    EOH
+end
+
+#`export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
+#`export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
+#instances = `sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json`
+
+ruby_block "Results" do
+    only_if { ::File.exists?(results) }
+
+    instances = File.read(results)
+
+    instances['Reservations'].each do |index, instance|
+      if instance['Tags'].detect {|tag| tag['key'] == "opsworks:layer:cassandra"}
+        cluster_ips << instance['PublicIpAddress']
+        log "Cassandra cluster #{instance['PublicIpAddress']}"
+      end
+    end
+end
 
 #directory "/root/.aws" do
 #  owner "root"
