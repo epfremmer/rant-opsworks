@@ -37,14 +37,14 @@ bash "app_cache_clear" do
     EOH
 end
 
-template "/home/deploy/.aws/config" do
-    source "awscli.config.erb"
-    mode  0644
-    variables(
-        :aws_access_key_id     => aws_access_key_id,
-        :aws_secret_access_key => aws_secret_access_key
-    )
-end
+#template "/home/deploy/.aws/config" do
+#    source "awscli.config.erb"
+#    mode  0644
+#    variables(
+#        :aws_access_key_id     => aws_access_key_id,
+#        :aws_secret_access_key => aws_secret_access_key
+#    )
+#end
 
 #instances = `aws ec2 describe-instances`
 
