@@ -35,14 +35,11 @@ include_recipe "python"
 
 python_pip "awscli"
 
-ENV['AWS_ACCESS_KEY_ID']     = aws_access_key_id
-ENV['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
+#ENV['AWS_ACCESS_KEY_ID']     = aws_access_key_id
+#ENV['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
 
-log `printenv AWS_ACCESS_KEY_ID`
-log `printenv AWS_SECRET_ACCESS_KEY`
-
-env AWS_ACCESS_KEY_ID = aws_access_key_id
-env AWS_SECRET_ACCESS_KEY = aws_secret_access_key
+#log `printenv AWS_ACCESS_KEY_ID`
+#log `printenv AWS_SECRET_ACCESS_KEY`
 
 `sudo export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
 `sudo export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
