@@ -31,11 +31,9 @@ package "python-pip" do
     action :install
 end
 
-bash "app_cache_clear" do
-    code <<-EOH
-        sudo pip install awscli
-    EOH
-end
+include_recipe "python"
+
+python_pip "awscli"
 
 #template "/home/deploy/.aws/config" do
 #    source "awscli.config.erb"
