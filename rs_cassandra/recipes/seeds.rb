@@ -41,8 +41,8 @@ python_pip "awscli"
 #log `printenv AWS_ACCESS_KEY_ID`
 #log `printenv AWS_SECRET_ACCESS_KEY`
 
-`sudo export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
-`sudo export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
+`export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
+`export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
 instances = `sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json`
 
 #directory "/root/.aws" do
