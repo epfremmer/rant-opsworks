@@ -44,7 +44,7 @@ python_pip "awscli"
 
 results = "/tmp/instances.json"
 
-bash "app_cache_clear" do
+bash "write_instance_json" do
     user "root"
     cwd "/tmp"
 
@@ -52,6 +52,17 @@ bash "app_cache_clear" do
 
     code <<-EOH
         sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json > #{results}
+    EOH
+end
+
+bash "log_instance_json" do
+    user "root"
+    cwd "/tmp"
+
+    environment ({'AWS_ACCESS_KEY_ID' => "#{aws_access_key_id}", 'AWS_SECRET_ACCESS_KEY' => "#{aws_secret_access_key}"})
+
+    code <<-EOH
+        sudo echo #{results}
     EOH
 end
 
