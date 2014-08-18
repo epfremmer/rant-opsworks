@@ -30,7 +30,7 @@ end
 
 bash "app_cache_clear" do
     code <<-EOH
-        sudo pip-install awscli
+        sudo pip install awscli
     EOH
 end
 
