@@ -35,14 +35,15 @@ include_recipe "python"
 
 python_pip "awscli"
 
-#template "/home/deploy/.aws/config" do
-#    source "awscli.config.erb"
-#    mode  0644
-#    variables(
-#        :aws_access_key_id     => aws_access_key_id,
-#        :aws_secret_access_key => aws_secret_access_key
-#    )
-#end
+template "/root/.aws/config" do
+    source "awscli.config.erb"
+    action :create
+    mode  0600
+    variables(
+        :aws_access_key_id     => aws_access_key_id,
+        :aws_secret_access_key => aws_secret_access_key
+    )
+end
 
 #instances = `aws ec2 describe-instances`
 
