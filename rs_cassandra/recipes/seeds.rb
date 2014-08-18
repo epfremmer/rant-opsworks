@@ -35,29 +35,34 @@ include_recipe "python"
 
 python_pip "awscli"
 
-directory "/root/.aws" do
-  owner "root"
-  group "root"
-  mode 00644
-  action :create
-end
+export AWS_ACCESS_KEY_ID     = aws_access_key_id
+export AWS_SECRET_ACCESS_KEY = aws_secret_access_key
 
-file "/root/.aws/config" do
-  owner "root"
-  group "root"
-  mode "0700"
-  action :create
-end
+instances = `aws ec2 describe-instances --output json`
 
-template "/root/.aws/config" do
-    source "awscli.config.erb"
-    action :create
-    mode  0700
-    variables(
-        :aws_access_key_id     => aws_access_key_id,
-        :aws_secret_access_key => aws_secret_access_key
-    )
-end
+#directory "/root/.aws" do
+#  owner "root"
+#  group "root"
+#  mode 00644
+#  action :create
+#end
+
+#file "/root/.aws/config" do
+#  owner "root"
+#  group "root"
+#  mode "0700"
+#  action :create
+#end
+
+#template "/root/.aws/config" do
+#    source "awscli.config.erb"
+#    action :create
+#    mode  0700
+#    variables(
+#        :aws_access_key_id     => aws_access_key_id,
+#        :aws_secret_access_key => aws_secret_access_key
+#    )
+#end
 
 #instances = `sudo aws ec2 describe-instances`
 
