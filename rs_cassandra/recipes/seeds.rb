@@ -38,7 +38,7 @@ python_pip "awscli"
 ENV['AWS_ACCESS_KEY_ID']     = aws_access_key_id
 ENV['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
 
-instances = `aws ec2 --region us-east-1 describe-instances --output json`
+instances = `/usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json`
 
 #directory "/root/.aws" do
 #  owner "root"
