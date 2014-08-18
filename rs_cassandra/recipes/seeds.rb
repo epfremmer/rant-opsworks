@@ -55,6 +55,13 @@ bash "app_cache_clear" do
     EOH
 end
 
+file results do
+  owner "root"
+  group "root"
+  mode "0777"
+  action :create
+end
+
 #`export AWS_ACCESS_KEY_ID = #{aws_access_key_id}`
 #`export AWS_SECRET_ACCESS_KEY = #{aws_secret_access_key}`
 #instances = `sudo /usr/local/bin/aws ec2 --region us-east-1 describe-instances --output json`
