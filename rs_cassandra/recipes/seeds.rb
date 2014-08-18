@@ -35,6 +35,13 @@ include_recipe "python"
 
 python_pip "awscli"
 
+directory "/root/.aws" do
+  owner "root"
+  group "root"
+  mode 00644
+  action :create
+end
+
 file "/root/.aws/config" do
   owner "root"
   group "root"
