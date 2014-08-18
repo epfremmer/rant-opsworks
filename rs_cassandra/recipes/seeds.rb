@@ -16,6 +16,9 @@
 layer_slug_name = node['opsworks']['instance']['layers'].first
 layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
 
+aws_access_key_id     = node['rant']['awscli']['aws_access_key_id']
+aws_secret_access_key = node['rant']['awscli']['aws_secret_access_key']
+
 dc_name = node['cassandra']['dc_name']
 cluster_ips = []
 
@@ -37,7 +40,10 @@ end
 template "/home/deploy/.aws/config" do
     source "awscli.config.erb"
     mode  0644
-    variables()
+    variables(
+        :aws_access_key_id     => aws_access_key_id
+        :aws_secret_access_key => aws_secret_access_key
+    )
 end
 
 #instances = `aws ec2 describe-instances`
