@@ -34,7 +34,7 @@ bash "app_cache_clear" do
     EOH
 end
 
-template "~/.aws/config" do
+template "/home/deploy/.aws/config" do
     source "awscli.config.erb"
     mode  0644
     variables()
