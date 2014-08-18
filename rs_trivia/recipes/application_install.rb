@@ -36,6 +36,9 @@ link "/etc/php5/mods-available/mcrypt.ini" do
     to "/etc/php5/fpm/conf.d/20-mcrypt.ini"
 end
 
+execute "ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/fpm/conf.d/21-mcrypt.ini" do
+end
+
 template "/etc/php5/mods-available/craft.ini" do
     source "php5_craft_ini.erb"
     mode '0644'
@@ -45,6 +48,6 @@ link "/etc/php5/fpm/conf.d/90-craft.ini" do
     to "/etc/php5/mods-available/craft.ini"
 end
 
-execute "ln -s /etc/php5/mods-available/craft.ini /etc/php5/fpm/conf.d/90-craft.ini" do
+execute "ln -s /etc/php5/mods-available/craft.ini /etc/php5/fpm/conf.d/91-craft.ini" do
 end
 
