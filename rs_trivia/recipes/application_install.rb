@@ -32,12 +32,22 @@ directory "#{app_web_root}/current" do
     group node['rant']['deploy']['group']
 end
 
+log "pre mcrypt link on conf.d"
+execute "ls -l /etc/php5/fpm/conf.d/" do
+end
+
 link "/etc/php5/mods-available/mcrypt.ini" do
     to "/etc/php5/fpm/conf.d/20-mcrypt.ini"
 end
 
+log "post mcrypt link on conf.d"
+execute "ls -l /etc/php5/fpm/conf.d/" do
+end
+
+
 execute "ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/fpm/conf.d/21-mcrypt.ini" do
 end
+log "post mcrypt ln on conf.d"
 
 template "/etc/php5/mods-available/craft.ini" do
     source "php5_craft_ini.erb"
@@ -47,7 +57,15 @@ end
 link "/etc/php5/fpm/conf.d/90-craft.ini" do
     to "/etc/php5/mods-available/craft.ini"
 end
+log "post craft link on conf.d"
+execute "ls -l /etc/php5/fpm/conf.d/" do
+end
+
 
 execute "ln -s /etc/php5/mods-available/craft.ini /etc/php5/fpm/conf.d/91-craft.ini" do
+end
+
+log "post craft ln on conf.d"
+execute "ls -l /etc/php5/fpm/conf.d/" do
 end
 
