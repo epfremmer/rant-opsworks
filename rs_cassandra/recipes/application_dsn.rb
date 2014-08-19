@@ -17,14 +17,23 @@
 #
 
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
-layer_slug_name = node['rant']['deploy']['db_layer_name']
-layer_instances = node['opsworks']['layers'][layer_slug_name]['instances']
+
+layer_slug_name  = node['rant']['deploy']['db_layer_name']
+layer_instances  = node['opsworks']['layers'][layer_slug_name]['instances']
+snitch_instances = node['opsworks']['layers']['cassandra-snitch']['instances']
 
 cluster_nodes = []
 
+# add internal seed ips
 layer_instances.each do |name, instance|
   log "Cassandra cluster #{instance['private_ip']}"
-  cluster_nodes << instance['private_ip']
+  cluster_ips << instance['private_ip']
+end
+
+# add internal snitch ips
+snitch_instances.each do |name, instance|
+  log "Cassandra cluster #{instance['private_ip']} [snitch]"
+  cluster_ips << instance['private_ip']
 end
 
 template "#{app_web_root}/current/app/config/cassandra_cluster.yml" do
