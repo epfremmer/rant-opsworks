@@ -22,7 +22,7 @@ snitch_ips  = node['opsworks']['rant']['snitch_ips']
 cluster_ips = []
 
 # add instance ip
-cluster_ips << node['opsworks']['instance']['private_ip']
+cluster_ips << node['opsworks']['instance']['ip']
 
 # add internal seed ips
 layer_instances.each do |name, instance|
