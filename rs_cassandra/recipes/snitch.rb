@@ -21,6 +21,9 @@ dc_name = node['cassandra']['dc_name']
 snitch_ips  = node['cassandra']['snitch_ips']
 cluster_ips = []
 
+default[:cassandra][:listen_address]    = node['opsworks']['instance']['private_ip']
+default[:cassandra][:broadcast_address] = node['opsworks']['instance']['ip']
+
 # add instance ip
 cluster_ips << node['opsworks']['instance']['ip']
 
