@@ -18,7 +18,7 @@ snitch_instances = node['opsworks']['layers']['cassandra-snitch']['instances']
 
 dc_name = node['cassandra']['dc_name']
 
-snitch_ips  = node['opsworks']['cassandra']['snitch_ips']
+snitch_ips  = node['cassandra']['snitch_ips']
 cluster_ips = []
 
 # add instance ip
