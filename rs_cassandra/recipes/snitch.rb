@@ -1,12 +1,12 @@
 #
 # Cookbook Name:: rs_cassandra
-# Recipe:: seeds
+# Recipe:: snitch
 #
 # Copyright 2014, Douglas Linsmeyer. All rights Reserved.
 #
 # Proprietary license.
 #
-# This recipe must run on all Cassandra servers when a new server
+# This recipe must run on all Cassandra snitch servers when a new server
 # comes online or if a server goes offline. Including the new server.
 #
 # It updates the cassandra.yaml configuration file for Cassandra
@@ -18,6 +18,7 @@ snitch_instances = node['opsworks']['layers']['cassandra-snitch']['instances']
 
 dc_name = node['cassandra']['dc_name']
 
+snitch_ips  = node['opsworks']['rant']['snitch_ips']
 cluster_ips = []
 
 # add instance ip
@@ -34,6 +35,9 @@ snitch_instances.each do |name, instance|
   log "Cassandra cluster #{instance['private_ip']} [snitch]"
   cluster_ips << instance['private_ip']
 end
+
+# add external snitch ips
+cluster_ips + snitch_ips
 
 service "cassandra" do
   supports :restart => true, :status => true
