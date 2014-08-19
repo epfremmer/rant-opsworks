@@ -26,13 +26,13 @@ node.default['cassandra']['broadcast_address'] = node['opsworks']['instance']['i
 # add internal seed ips
 layer_instances.each do |name, instance|
   log "Cassandra cluster #{instance['ip']}"
-  cluster_ips << instance['private_ip']
+  cluster_ips << instance['ip']
 end
 
 # add internal snitch ips
 snitch_instances.each do |name, instance|
   log "Cassandra cluster #{instance['ip']} [snitch]"
-  cluster_ips << instance['private_ip']
+  cluster_ips << instance['ip']
 end
 
 service "cassandra" do
