@@ -66,7 +66,7 @@ bash "log_instance_json" do
     EOH
 end
 
-echo $USER
+log $USER
 
 file results do
   owner "root"
