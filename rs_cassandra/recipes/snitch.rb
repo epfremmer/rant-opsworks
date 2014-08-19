@@ -37,7 +37,7 @@ snitch_instances.each do |name, instance|
 end
 
 # add external snitch ips
-cluster_ips + snitch_ips
+cluster_ips = cluster_ips + snitch_ips
 
 service "cassandra" do
   supports :restart => true, :status => true
