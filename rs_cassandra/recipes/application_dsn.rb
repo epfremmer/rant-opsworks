@@ -20,7 +20,7 @@ app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vh
 
 layer_slug_name  = node['rant']['deploy']['db_layer_name']
 layer_instances  = node['opsworks']['layers'][layer_slug_name]['instances']
-snitch_instances = node['opsworks']['layers']['cassandra-snitch']['instances']
+snitch_instances = node['opsworks']['layers'].has_key?("cassandra-snitch") ? node['opsworks']['layers']['cassandra-snitch']['instances'] : []
 
 cluster_nodes = []
 
