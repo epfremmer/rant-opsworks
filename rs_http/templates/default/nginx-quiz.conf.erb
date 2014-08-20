@@ -18,6 +18,7 @@ server {
         fastcgi_pass unix:<%= @socket_path %>/<%= @vhost %>.socket;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_read_timeout   300;
         <% @env_vars.each do |key, value| -%>
         <% unless value.empty? -%>
         fastcgi_param <%= key %> <%= value %>;
@@ -33,10 +34,6 @@ server {
         expires max;
         add_header Pragma public;
         add_header Cache-Control "public, must-revalidate, proxy-revalidate";
-    }
-
-    location ~ ^/admin.* {
-        fastcgi_read_timeout   300;
     }
 
     location = /robots.txt  { access_log off; log_not_found off; }
