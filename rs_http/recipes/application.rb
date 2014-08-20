@@ -11,6 +11,7 @@
 Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
 
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
+app_env      = "#{node['rant']['application']['environment_name']}"
 
 application node['rant']['application']['name'] do
     path "#{app_web_root}"

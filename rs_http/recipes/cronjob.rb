@@ -13,11 +13,12 @@
 # encoding: UTF-8
 
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
-log_file = "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vhost']}.cron.log"
+log_file     = "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vhost']}.cron.log"
+app_env      = "#{node['rant']['application']['environment_name']}"
 
 cron "leaderboard_cron" do
   minute "0"
   action :create
-  command "#{app_web_root}/current/app/console --env=staging rant:comments:userleaderboard:build >> #{log_file} 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:comments:userleaderboard:build >> #{log_file} 2>&1"
   user "root"
 end
