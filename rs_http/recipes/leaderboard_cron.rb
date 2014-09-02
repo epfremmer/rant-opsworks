@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rs_http
-# Recipe:: cronjob
+# Recipe:: leaderboard_cron
 #
 # Copyright 2014, Edward Pfremmer. All rights Reserved.
 #
