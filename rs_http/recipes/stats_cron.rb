@@ -116,57 +116,6 @@ cron "nhl_refresh_teams" do
   user "root"
 end
 
-# Refresh current players every hour during active hours
-# 0 0-3,8-23 * * * php app/console rant:stats:cbb:refresh:players:current >/dev/null 2>&1
-# 0 0-3,8-23 * * * php app/console rant:stats:cfb:refresh:players:current >/dev/null 2>&1
-# 0 0-3,8-23 * * * php app/console rant:stats:mlb:refresh:players:current >/dev/null 2>&1
-# 0 0-3,8-23 * * * php app/console rant:stats:nba:refresh:players:current >/dev/null 2>&1
-# 0 0-3,8-23 * * * php app/console rant:stats:nfl:refresh:players:current >/dev/null 2>&1
-# 0 0-3,8-23 * * * php app/console rant:stats:nhl:refresh:players:current >/dev/null 2>&1
-
-cron "cbb_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-cron "cfb_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-cron "mlb_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-cron "nba_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-cron "nfl_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-cron "nhl_refresh_players" do
-  minute "0"
-  hour "0-3,8-23"
-  action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:players:current >/dev/null 2>&1"
-  user "root"
-end
-
 # Refresh all data once a night at 3:00 am
 # 0 3 * * * php app/console rant:stats:cbb:refresh:all >/dev/null 2>&1
 # 0 3 * * * php app/console rant:stats:cfb:refresh:all >/dev/null 2>&1
