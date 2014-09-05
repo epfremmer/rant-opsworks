@@ -22,42 +22,42 @@ app_env      = "#{node['rant']['application']['environment_name']}"
 0 8 * * * php app/console rant:stats:nfl:refresh:current >/dev/null 2>&1
 0 8 * * * php app/console rant:stats:nhl:refresh:current >/dev/null 2>&1
 
-cron "cbb_refresh_games" do
+cron "cbb_refresh_current" do
   minute "0"
   hour "8"
   action :create
   command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:current >> #{log_file} 2>&1"
   user "root"
 end
-cron "cfb_refresh_games" do
+cron "cfb_refresh_current" do
   minute "0"
   hour "8"
   action :create
   command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:current >> #{log_file} 2>&1"
   user "root"
 end
-cron "mlb_refresh_games" do
+cron "mlb_refresh_current" do
   minute "0"
   hour "8"
   action :create
   command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:current >> #{log_file} 2>&1"
   user "root"
 end
-cron "nba_refresh_games" do
+cron "nba_refresh_current" do
   minute "0"
   hour "8"
   action :create
   command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:current >> #{log_file} 2>&1"
   user "root"
 end
-cron "nfl_refresh_games" do
+cron "nfl_refresh_current" do
   minute "0"
   hour "8"
   action :create
   command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:current >> #{log_file} 2>&1"
   user "root"
 end
-cron "nhl_refresh_games" do
+cron "nhl_refresh_current" do
   minute "0"
   hour "8"
   action :create
