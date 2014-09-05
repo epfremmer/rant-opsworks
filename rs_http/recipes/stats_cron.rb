@@ -15,12 +15,12 @@ log_file     = "#{node['rant']['nginx']['log_dir']}/#{node['rant']['nginx']['vho
 app_env      = "#{node['rant']['application']['environment_name']}"
 
 # Refresh current data continuously starting at 8 am, the script will shut down automatically after 3am
-0 8 * * * php app/console rant:stats:cbb:refresh:current >/dev/null 2>&1
-0 8 * * * php app/console rant:stats:cfb:refresh:current >/dev/null 2>&1
-0 8 * * * php app/console rant:stats:mlb:refresh:current >/dev/null 2>&1
-0 8 * * * php app/console rant:stats:nba:refresh:current >/dev/null 2>&1
-0 8 * * * php app/console rant:stats:nfl:refresh:current >/dev/null 2>&1
-0 8 * * * php app/console rant:stats:nhl:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:cbb:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:cfb:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:mlb:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:nba:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:nfl:refresh:current >/dev/null 2>&1
+# 0 8 * * * php app/console rant:stats:nhl:refresh:current >/dev/null 2>&1
 
 cron "cbb_refresh_current" do
   minute "0"
