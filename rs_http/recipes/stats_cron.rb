@@ -26,42 +26,42 @@ cron "cbb_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "cfb_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "mlb_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nba_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nfl_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nhl_refresh_games" do
   minute "*/5"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:games:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:games:current >> #{log_file} 2>&1"
   user "root"
 end
 
@@ -77,42 +77,42 @@ cron "cbb_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "cfb_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "mlb_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nba_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nfl_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 cron "nhl_refresh_teams" do
   minute "3,18,33,48"
   hour "0-3,8-23"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:teams:current >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:teams:current >> #{log_file} 2>&1"
   user "root"
 end
 
@@ -128,41 +128,41 @@ cron "cbb_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cbb:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
 cron "cfb_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:cfb:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
 cron "mlb_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:mlb:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
 cron "nba_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nba:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
 cron "nfl_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nfl:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
 cron "nhl_refresh_all" do
   minute "0"
   hour "3"
   action :create
-  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:all >/dev/null 2>&1"
+  command "#{app_web_root}/current/app/console --env=#{app_env} rant:stats:nhl:refresh:all >> #{log_file} 2>&1"
   user "root"
 end
