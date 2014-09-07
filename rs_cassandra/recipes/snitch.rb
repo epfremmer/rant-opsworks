@@ -22,7 +22,7 @@ snitch_ips  = node['cassandra']['snitch_ips']
 cluster_ips = []
 
 node.default['cassandra']['listen_address']    = node['opsworks']['instance']['private_ip']
-node.default['cassandra']['broadcast_address'] = node['opsworks']['instance']['ip']
+node.default['cassandra']['broadcast_address'] = node['opsworks']['instance']['elastic_ip'] || node['opsworks']['instance']['ip']
 
 # add internal seed ips
 layer_instances.each do |name, instance|
@@ -33,7 +33,7 @@ end
 # add internal snitch ips
 snitch_instances.each do |name, instance|
   log "Cassandra cluster #{instance['ip']} [snitch]"
-  cluster_ips << instance['ip']
+  cluster_ips << instance['elastic_ip'] || instance['ip']
 end
 
 # add external snitch ips
