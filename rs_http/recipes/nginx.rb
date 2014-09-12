@@ -1,11 +1,17 @@
 # Delete all nginx configuration files and create virtualhost configuration
-nginx_path = node['rant']['nginx']['config_dir']
+nginx_path   = node['rant']['nginx']['config_dir']
+web_root     = "#{node['rant']['nginx']['web_root']}"
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 
 ruby_block 'Clear nginx configuration' do
     block do
         Dir.foreach("#{nginx_path}/sites-enabled") {|f| fn = File.join("#{nginx_path}/sites-enabled", f); File.delete(fn) if f != '.' && f != '..'}
     end
+end
+
+directory web_root do
+    owner node['rant']['deploy']['user']
+    group node['rant']['deploy']['group']
 end
 
 directory app_web_root do
