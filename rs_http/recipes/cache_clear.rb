@@ -16,12 +16,12 @@ Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION > "1.9"
 app_web_root = "#{node['rant']['nginx']['web_root']}/#{node['rant']['nginx']['vhost']}"
 app_env      = "#{node['rant']['application']['environment_name']}"
 
-bash "app_cache_clear" do
-    cwd "#{app_web_root}/current"
-    code <<-EOH
-        sudo app/console --env=#{app_env} redis:flushall --no-interaction
-    EOH
-end
+# bash "app_cache_clear" do
+#     cwd "#{app_web_root}/current"
+#     code <<-EOH
+#         sudo app/console --env=#{app_env} redis:flushall --no-interaction
+#     EOH
+# end
 
 service 'php5-fpm' do
     provider Chef::Provider::Service::Upstart
